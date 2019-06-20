@@ -1,18 +1,16 @@
 var sort = function (json) {
     return {
         asc: function asc(sortBy) {
-            console.log("sort() - asc sortBy: " + sortBy)
             return sortJSON(json, sortBy, "asc");
         },
         desc: function desc(sortBy) {
-            console.log("sort() - desc sortBy: " + sortBy)
             return sortJSON(json, sortBy, "desc");
         },
     }
 }
 
 var sortJSON = function (jsonArray, key, order) {
-    console.log("sortJSON() - key: " + key + " | order: " + order)
+
     var tempArray = []
 
     for (var item of jsonArray) {
