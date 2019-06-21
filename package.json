@@ -1,7 +1,7 @@
 {
   "name": "sort-nested-json",
   "version": "0.1.1",
-  "description": "A module to sort a JSON file.",
+  "description": "A module to sort a JSON array.",
   "main": "index.js",
   "repository": "github:jgpieters/sort-nested-json",
   "scripts": {
