@@ -1,6 +1,6 @@
 {
   "name": "sort-nested-json",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A module to sort a JSON array.",
   "main": "index.js",
   "repository": "github:jgpieters/sort-nested-json",
@@ -12,7 +12,11 @@
     "sort",
     "order",
     "array",
-    "sorting"
+    "sorting",
+    "asc",
+    "desc",
+    "nested",
+    "sort"
   ],
   "author": "Joris Pieters <joris.pieters.80@gmail.com>",
   "license": "MIT"
