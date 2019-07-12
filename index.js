@@ -1,7 +1,7 @@
 const ASC = "asc"
 const DESC = "desc"
 
-var sortWithMemory = function (json) {
+let sortWithMemory = function (json) {
 
     const { result, order_by, direction } = json
 
@@ -35,7 +35,7 @@ var sortWithMemory = function (json) {
     }
 }
 
-var sort = (json) => {
+let sort = (json) => {
     return {
         asc: function asc(sortBy) {
             return sortJSON(json, sortBy, ASC);
@@ -46,23 +46,23 @@ var sort = (json) => {
     }
 }
 
-var sortJSON = (jsonArray, key, order) => {
+let sortJSON = (jsonArray, key, order) => {
 
-    var tempArray = []
+    let tempArray = []
 
-    for (var item of jsonArray) {
-        var object = item
-        var objectKey = ""
+    for (let item of jsonArray) {
+        let object = item
+        let objectKey = ""
 
-        var keys = key.split(".");
-        for (var keyItem of keys) {
+        let keys = key.split(".");
+        for (let keyItem of keys) {
             item = item[keyItem]
             objectKey = item
         }
         tempArray.push({ key: objectKey, object: object })
     }
 
-    var sortedArray = tempArray.sort(function (a, b) {
+    let sortedArray = tempArray.sort(function (a, b) {
         if (typeof a === 'string') {
             return compareStrings(a.key, b.key, order)
         }
@@ -72,9 +72,9 @@ var sortJSON = (jsonArray, key, order) => {
         return "";
     })
 
-    var jsonNewArray = [];
+    let jsonNewArray = [];
 
-    for (var i in sortedArray) {
+    for (let i in sortedArray) {
         jsonNewArray.push(sortedArray[i].object)
     }
     return jsonNewArray
