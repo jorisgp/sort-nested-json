@@ -12,10 +12,12 @@
     "sort",
     "order",
     "array",
+    "list",
     "sorting",
     "asc",
     "desc",
     "nested",
+    "object",
     "table"
   ],
   "author": "Joris Pieters <joris.pieters.80@gmail.com>",
