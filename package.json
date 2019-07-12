@@ -1,11 +1,11 @@
 {
   "name": "sort-nested-json",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A module to sort a JSON array.",
   "main": "index.js",
   "repository": "github:jgpieters/sort-nested-json",
   "scripts": {
-    "test": "test"
+    "test": "mocha"
   },
   "keywords": [
     "json",
@@ -16,8 +16,11 @@
     "asc",
     "desc",
     "nested",
-    "sort"
+    "table"
   ],
   "author": "Joris Pieters <joris.pieters.80@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "6.1.4"
+  }
 }
