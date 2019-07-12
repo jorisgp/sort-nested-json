@@ -42,7 +42,7 @@ console.log(list)
 
 ```
 
-Here is an  example of using sort-nested-json on array filled with JavaScript objects, the sort is executed on a nested value.
+Here is an  example of using sort-nested-json on array filled with objects, the sort is executed on a nested value.
 
 ```js
 
@@ -84,7 +84,7 @@ console.log(list)
 
 ```
 
-Here is an  example of using sort-nested-json within a React Component. The sortWithMemory function returns the previous sort settings with the result. If you provide this result with your second sort request it will automatically switch between ascending (ASC) and descending (DESC) when your sort request is on the same column. 
+Here is an  example of using sort-nested-json within a React Component. The sortWithMemory function returns the previous sort settings with the result. If you provide this result with your second sort request, it will automatically switch between ascending (ASC) and descending (DESC) when your sort request is on the same column. 
 
 ```js
 

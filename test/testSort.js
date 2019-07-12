@@ -3,15 +3,11 @@ let snj = require("../index")
 
 describe('Sorting', () => {
     describe('Sort JSON String', () => {
-        let list = JSON.stringify([{ "id": 1, "city": "Amsterdam" },
-        { "id": 2, "city": "Zaandam" },
-        { "id": 3, "city": "Enkhuizen" }])
+        let jsonString = '[{"id":1,"city":"Amsterdam"},{"id":2,"city":"Zaandam"},{"id":3,"city":"Enkhuizen"}]'
 
-        console.log("list: " + list)
+        it("sort JSON string containing an Array descending", () => {
 
-        it("sort array with objects descending", () => {
-
-            let ascList = snj.sort(list).desc("city")
+            let ascList = snj.sort(jsonString).desc("city")
             ascList.forEach((place, index) => {
                 console.log("city: " + place.city)
                 if (index === 0) {
@@ -27,11 +23,11 @@ describe('Sorting', () => {
 
         });
 
-        it("sort array with JSON objects ascending", () => {
+        it("sort JSON string containing an Array ascending", () => {
 
-            let ascList = snj.sort(list).asc("city")
+            let ascList = snj.sort(jsonString).asc("city")
             ascList.forEach((place, index) => {
-                console.log("city: " + place.city + " index: " + index)
+                console.log("city: " + place.city)
                 if (index === 0) {
                     assert.equal(place.city, "Amsterdam");
                 }
