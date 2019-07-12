@@ -35,22 +35,31 @@ let sortWithMemory = function (json) {
     }
 }
 
-let sort = (json) => {
+let sort = (list) => {
+
+
+
     return {
         asc: function asc(sortBy) {
-            return sortJSON(json, sortBy, ASC);
+            return sortJSON(list, sortBy, ASC);
         },
         desc: function desc(sortBy) {
-            return sortJSON(json, sortBy, DESC);
+            return sortJSON(list, sortBy, DESC);
         },
     }
 }
 
-let sortJSON = (jsonArray, key, order) => {
+let sortJSON = (list, key, order) => {
+
+    try {
+        list = JSON.parse(list)
+    } catch (e) {
+        list = list
+    }
 
     let tempArray = []
 
-    for (let item of jsonArray) {
+    for (let item of list) {
         let object = item
         let objectKey = ""
 

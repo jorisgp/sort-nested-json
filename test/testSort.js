@@ -2,12 +2,14 @@ let assert = require("assert")
 let snj = require("../index")
 
 describe('Sorting', () => {
-    describe('Sort array JSON objects', () => {
-        let list = [{ "id": 1, "city": "Amsterdam" },
+    describe('Sort JSON String', () => {
+        let list = JSON.stringify([{ "id": 1, "city": "Amsterdam" },
         { "id": 2, "city": "Zaandam" },
-        { "id": 3, "city": "Enkhuizen" }]
+        { "id": 3, "city": "Enkhuizen" }])
 
-        it("sort array with JSON objects descending", () => {
+        console.log("list: " + list)
+
+        it("sort array with objects descending", () => {
 
             let ascList = snj.sort(list).desc("city")
             ascList.forEach((place, index) => {

@@ -1,6 +1,6 @@
 # sort-nested-json
 
-You can use sort-nested-json to sort an array containing JSON objects or JavaScript Objects.
+You can use sort-nested-json to sort an array containing JavaScript Objects or a JSON String (containing an array).
 
 ## Install
 
@@ -10,7 +10,7 @@ npm install --save sort-nested-json
 
 ## Usage
 
-Here is an basic example of using sort-nested-json on an array filled with JSON objects.
+Here is an basic example of using sort-nested-json on an array filled with objects.
 
 ```js
 
