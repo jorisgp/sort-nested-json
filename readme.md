@@ -173,6 +173,9 @@ const style = {
 }
 ```
 
+If you sort on a column which also contains nulls, the functions sortNullsFirst() and sortNullsLast functions has been added. They work simular as the sort function.
+```
+
 ## License
 
 [MIT](https://sort-nested-json.mit-license.org/)

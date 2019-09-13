@@ -1,13 +1,18 @@
 const ASC = "asc"
 const DESC = "desc"
+const FIRST = "first"
+const LAST = "last"
+const TYPE_STRING = "string"
+const TYPE_OBJECT = "object"
+const TYPE_NUMBER = "number"
 
-let sortWithMemory = function (json) {
+let sortWithMemory = (json) => {
 
     const { result, order_by, direction } = json
 
     if (order_by && direction === ASC || direction === DESC) {
         return {
-            run: function asc(orderBy) {
+            run: (orderBy) => {
                 let newdirection = ASC
                 if (order_by === orderBy && direction === ASC) {
                     newdirection = DESC
@@ -22,7 +27,7 @@ let sortWithMemory = function (json) {
         }
     } else {
         return {
-            run: function asc(orderBy) {
+            run: (orderBy) => {
                 let newdirection = ASC
                 let resultwithmemory = {
                     result: sortJSON(json, orderBy, newdirection),
@@ -36,20 +41,39 @@ let sortWithMemory = function (json) {
 }
 
 let sort = (list) => {
-
-
-
     return {
-        asc: function asc(sortBy) {
+        asc: (sortBy) => {
             return sortJSON(list, sortBy, ASC);
         },
-        desc: function desc(sortBy) {
+        desc: (sortBy) => {
             return sortJSON(list, sortBy, DESC);
         },
     }
 }
 
-let sortJSON = (list, key, order) => {
+let sortNullsLast = (list) => {
+    return {
+        asc: (sortBy) => {
+            return sortJSON(list, sortBy, ASC, LAST);
+        },
+        desc: (sortBy) => {
+            return sortJSON(list, sortBy, DESC, LAST);
+        },
+    }
+}
+
+let sortNullsFirst = (list) => {
+    return {
+        asc: (sortBy) => {
+            return sortJSON(list, sortBy, ASC, FIRST);
+        },
+        desc: (sortBy) => {
+            return sortJSON(list, sortBy, DESC, FIRST);
+        },
+    }
+}
+
+let sortJSON = (list, key, order, nulls) => {
 
     try {
         list = JSON.parse(list)
@@ -71,12 +95,12 @@ let sortJSON = (list, key, order) => {
         tempArray.push({ key: objectKey, object: object })
     }
 
-    let sortedArray = tempArray.sort(function (a, b) {
-        if (typeof a === 'string') {
-            return compareStrings(a.key, b.key, order)
+    let sortedArray = tempArray.sort((a, b) => {
+        if (typeof a === TYPE_STRING) {
+            return compareStrings(a.key, b.key, order, nulls)
         }
-        else if (typeof a === 'number' || typeof a === 'object') {
-            return compareNumber(a.key, b.key, order)
+        else if (typeof a === TYPE_NUMBER || typeof a === TYPE_OBJECT) {
+            return compareNumber(a.key, b.key, order, nulls)
         }
         return "";
     })
@@ -89,7 +113,10 @@ let sortJSON = (list, key, order) => {
     return jsonNewArray
 }
 
-function compareStrings(a, b, order) {
+let compareStrings = (a, b, order, nulls) => {
+    if (nulls != null && (a == null || b == null)) {
+        return handleNulls(a, b, nulls)
+    }
     a = a.toLowerCase();
     b = b.toLowerCase();
 
@@ -101,7 +128,10 @@ function compareStrings(a, b, order) {
     }
 }
 
-function compareNumber(a, b, order) {
+let compareNumber = (a, b, order, nulls) => {
+    if (nulls != null && (a == null || b == null)) {
+        return handleNulls(a, b, nulls)
+    }
     if (order.toLowerCase() === ASC) {
         return (a < b) ? -1 : (a > b) ? 1 : 0;
     }
@@ -110,5 +140,27 @@ function compareNumber(a, b, order) {
     }
 }
 
+let handleNulls = (a, b, nulls) => {
+    let result
+    if (a == null && b != null) {
+        result = 1
+    }
+    if (a != null && b == null) {
+        result = -1
+    }
+    if (a == null && b == null) {
+        result = 0;
+    }
+
+    if (nulls === LAST) {
+        return result
+    }
+    if (nulls === FIRST) {
+        return result * -1
+    }
+}
+
 module.exports.sort = sort;
 module.exports.sortWithMemory = sortWithMemory;
+module.exports.sortNullsLast = sortNullsLast;
+module.exports.sortNullsFirst = sortNullsFirst;
