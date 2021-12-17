@@ -194,8 +194,7 @@ interface SortObject {
   object: string;
 }
 
-declare var module: any;
-module.exports = module.export = {
+export = {
   sortWithMemory,
   sortNullsLast,
   sortNullsFirst,

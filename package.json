@@ -1,11 +1,18 @@
 {
   "name": "sort-nested-json",
-  "version": "0.2.1",
+  "version": "0.3.2",
   "description": "A module to sort a JSON array.",
-  "main": "index.js",
+  "main": "lib/cjs/index.js",
+  "types": "lib/cjs/index.d.js",
+  "module": "lib/esm/index.js",
+  "files": [
+    "lib/"
+  ],
   "repository": "github:jgpieters/sort-nested-json",
   "scripts": {
-    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'"
+    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'",
+    "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "publish:npm": "npm run tsc && npm publish"
   },
   "keywords": [
     "json",
