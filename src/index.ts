@@ -1,4 +1,4 @@
-let sortWithMemory = (json: any): any => {
+const sortWithMemory = (json: any): any => {
   const { result, order_by, direction } = json;
 
   if (
@@ -13,7 +13,7 @@ let sortWithMemory = (json: any): any => {
           newdirection = Direction.DESC;
         }
 
-        let resultwithmemory = {
+        const resultwithmemory = {
           result: sortJSON(result, orderBy, newdirection),
           order_by: orderBy,
           direction: newdirection,
@@ -25,9 +25,9 @@ let sortWithMemory = (json: any): any => {
   } else {
     return {
       run: (orderBy: string) => {
-        let newdirection = Direction.ASC;
+        const newdirection = Direction.ASC;
 
-        let resultwithmemory = {
+        const resultwithmemory = {
           result: sortJSON(json, orderBy, newdirection),
           order_by: orderBy,
           direction: newdirection,
@@ -39,66 +39,66 @@ let sortWithMemory = (json: any): any => {
   }
 };
 
-let sort = (list: any) => {
+const sort = (list: any) => {
   return {
-    asc: (sortBy: string) => {
+    asc: (sortBy: string): any[] => {
       return sortJSON(list, sortBy, Direction.ASC);
     },
-    desc: (sortBy: string) => {
+    desc: (sortBy: string): any[] => {
       return sortJSON(list, sortBy, Direction.DESC);
     },
   };
 };
 
-let sortNullsLast = (list: any) => {
+const sortNullsLast = (list: any) => {
   return {
-    asc: (sortBy: string) => {
+    asc: (sortBy: string): any[] => {
       return sortJSON(list, sortBy, Direction.ASC, Position.LAST);
     },
-    desc: (sortBy: string) => {
+    desc: (sortBy: string): any[] => {
       return sortJSON(list, sortBy, Direction.DESC, Position.LAST);
     },
   };
 };
 
-let sortNullsFirst = (list: any) => {
+const sortNullsFirst = (list: any) => {
   return {
-    asc: (sortBy: string) => {
+    asc: (sortBy: string): any[] => {
       return sortJSON(list, sortBy, Direction.ASC, Position.FIRST);
     },
-    desc: (sortBy: string) => {
+    desc: (sortBy: string): any[] => {
       return sortJSON(list, sortBy, Direction.DESC, Position.FIRST);
     },
   };
 };
 
-let sortJSON = (
+const sortJSON = (
   list: string,
   key: string,
   order: Direction,
   nulls?: Position
-) => {
+): any[] => {
   try {
     list = JSON.parse(list);
   } catch (e) {
     list = list;
   }
 
-  let tempArray: SortObject[] = [];
+  const tempArray: SortObject[] = [];
 
   for (let item of list) {
-    let object = item;
+    const object = item;
     let objectKey = "";
 
-    let keys: string[] = key.split(".");
-    for (let keyItem of keys) {
+    const keys: string[] = key.split(".");
+    for (const keyItem of keys) {
       item = item[keyItem as any];
       objectKey = item;
     }
     tempArray.push({ key: objectKey, object: object });
   }
 
-  let sortedArray = tempArray.sort((a: any, b: any): any => {
+  const sortedArray = tempArray.sort((a: any, b: any): any => {
     if (typeof a === Type.STRING) {
       return compareStrings(a.key, b.key, order, nulls);
     } else if (typeof a === Type.NUMBER || typeof a === Type.OBJECT) {
@@ -107,15 +107,15 @@ let sortJSON = (
     return "";
   });
 
-  let jsonNewArray = [];
+  const jsonNewArray = [];
 
-  for (let i in sortedArray) {
+  for (const i in sortedArray) {
     jsonNewArray.push(sortedArray[i].object);
   }
   return jsonNewArray;
 };
 
-let compareStrings = (
+const compareStrings = (
   a: string,
   b: string,
   order: Direction,
@@ -135,7 +135,7 @@ let compareStrings = (
   }
 };
 
-let compareNumber = (
+const compareNumber = (
   a: string,
   b: string,
   order: Direction,
@@ -153,7 +153,7 @@ let compareNumber = (
   return 0;
 };
 
-let handleNulls = (a: string, b: string, nulls: Position) => {
+const handleNulls = (a: string, b: string, nulls: Position) => {
   let result = 0;
   if (a == null && b != null) {
     result = 1;
@@ -189,14 +189,9 @@ enum Type {
   NUMBER = "number",
 }
 
-interface SortObject {
+type SortObject = {
   key: string;
   object: string;
-}
-
-export = {
-  sortWithMemory,
-  sortNullsLast,
-  sortNullsFirst,
-  sort,
 };
+
+export { sortWithMemory, sortNullsLast, sortNullsFirst, sort };
