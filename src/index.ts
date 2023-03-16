@@ -194,4 +194,4 @@ type SortObject = {
   object: string;
 };
 
-export { sortWithMemory, sortNullsLast, sortNullsFirst, sort };
+export = { sortWithMemory, sortNullsLast, sortNullsFirst, sort };
