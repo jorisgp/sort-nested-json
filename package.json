@@ -1,6 +1,6 @@
 {
   "name": "sort-nested-json",
-  "version": "0.4.1",
+  "version": "0.4.3",
   "description": "A module to sort a JSON array.",
   "main": "lib/cjs/index.js",
   "types": "lib/cjs/index.d.js",

@@ -1,5 +1,5 @@
 let assert = require("assert");
-let snj = require("../src/index.ts");
+let snj = require("../index.ts");
 
 describe("Sorting", () => {
   describe("Sort JSON String", () => {
